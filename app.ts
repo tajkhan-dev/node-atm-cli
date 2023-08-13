@@ -10,7 +10,7 @@ interface atmData{
     
 }
 const Atm=async()=>{
-const balance=100000
+const balance=Math.floor(Math.random()*100000)
     const {pin,options,method,amount,name,cashoptions}:atmData =await inquirer.prompt([
         {
             type:'input',
