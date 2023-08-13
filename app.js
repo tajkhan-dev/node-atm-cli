@@ -1,7 +1,7 @@
 import inquirer from "inquirer";
 const Atm = async () => {
     const balance = 100000;
-    const { pin, accType, options } = await inquirer.prompt([
+    const { pin, accType, options, method, amount } = await inquirer.prompt([
         {
             type: 'number',
             name: 'pin',
@@ -48,6 +48,10 @@ const Atm = async () => {
     ]);
     if (options === "check balance") {
         console.log(balance);
+    }
+    else if (method === 'Manual') {
+        const remainingBal = balance - amount;
+        console.log(`${amount} Cash withdrawed remaining balance is ${remainingBal} `);
     }
 };
 Atm();

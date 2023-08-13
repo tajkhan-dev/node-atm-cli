@@ -3,12 +3,20 @@ interface atmData{
     pin:number,
     accType:string,
     options:string,
-    cashoptions:number
+    cashoptions:number,
+    method:string,
+    amount:number
+    name:string
     
 }
 const Atm=async()=>{
 const balance=100000
-    const {pin,accType,options}:atmData =await inquirer.prompt([
+    const {pin,options,method,amount,name,cashoptions}:atmData =await inquirer.prompt([
+        {
+            type:'input',
+            name:'name',
+            message:'Enter Your username'
+        },
         {
             type:'number',
             name:'pin',
@@ -57,9 +65,21 @@ const balance=100000
         
         }
     ])
-if(options==="check balance"){
-    console.log(balance)
-}
+    if(name&&pin){
+
+    
+     if(options==="check balance"){
+            console.log(balance)
+        }else if(method==='Manual'){
+           const remainingBal= balance-amount
+            console.log(`Rs ${amount} Cash withdrawed remaining balance is Rs${remainingBal} `)
+        
+        }else if(method==="Fast Cash"){
+            const remainingBal=balance-cashoptions
+            console.log(`${cashoptions} withdrawed Your remaining balance is ${remainingBal}`)
+        }
+    }
+
 }
 
 Atm()
