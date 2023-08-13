@@ -2,10 +2,13 @@ import inquirer from "inquirer";
 interface atmData{
     pin:number,
     accType:string,
+    options:string,
+    cashoptions:number
     
 }
 const Atm=async()=>{
-    const {pin,} =await inquirer.prompt([
+const balance=100000
+    const {pin,accType,options}:atmData =await inquirer.prompt([
         {
             type:'number',
             name:'pin',
@@ -16,10 +19,47 @@ const Atm=async()=>{
             choices:["current",'saving'],
             name:'accType',
             message:'Choose account type'
+        },
+        {
+          type:'list',
+          choices:['check balance','Withdrawal'],
+          name:'options',
+          message:'choose one option'
+        },
+        {
+            type:'list',
+            name:'method',
+            choices:['Fast Cash' , 'Manual'],
+            message:'choose one option',
+            when(answers){
+                return answers.options==='Withdrawal'
+            }
+        },
+        {
+            type:'number',
+            name:'amount',
+            message:'enter amount',
+            when(answers){
+                return answers.method==="Manual"
+            }
+
+        
+        },
+        {
+            type:'list',
+            name:'cashoptions',
+            choices:[10000,20000,30000,50000],
+            message:'select one',
+            when(answers){
+                return answers.method==="Fast Cash"
+            }
+
+        
         }
     ])
-    console.log(pin)
-    console.log
+if(options==="check balance"){
+    console.log(balance)
+}
 }
 
 Atm()
