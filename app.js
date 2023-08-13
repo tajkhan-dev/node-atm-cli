@@ -5,6 +5,12 @@ const Atm = async () => {
             type: 'number',
             name: 'pin',
             message: 'Enter Your Pin'
+        },
+        {
+            type: 'list',
+            choices: ["current", 'saving'],
+            name: 'accType',
+            message: 'Choose account type'
         }
     ]);
     console.log(pin);
